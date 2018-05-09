@@ -1,0 +1,11 @@
+Token Type: ERC20 – Ethereum Blockchain +
+Token Symbol: FUN +
+Token Name: THEFORTUNEFUND +
+Maximum Supply (Hard Cap): 88,888,888 +
+Available for Purchase: 77,333,333 +
+Minimum ICO Contribution: 0.04 ETH +
+Minimum Raise: $2 000 000
+Price per token: Pre-sale (up to 7 500 000 tokens): $0.95
+First 48 hours of ICO: $1.00
+48 hrs to Week 4 of ICO: $1.05
+Week 4-10 of ICO: $1.10
