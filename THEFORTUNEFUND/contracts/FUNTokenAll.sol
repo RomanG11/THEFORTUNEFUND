@@ -77,13 +77,15 @@ contract Ownable {
 
   /**
    * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
+   * @param _newOwner The address to transfer ownership to.
    */
-  function transferOwnership(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
-    emit OwnershipTransferred(owner, newOwner);
-    owner = newOwner;
+  function transferOwnership(address _newOwner) public onlyOwner {
+    require(_newOwner != address(0));
+    emit OwnershipTransferred(owner, _newOwner);
+    owner = _newOwner;
   }
+  
+  event OwnershipTransferred(address oldOwner, address newOwner);
 }
 
 contract FUNToken is Ownable { //ERC - 20 token contract
@@ -119,8 +121,8 @@ contract FUNToken is Ownable { //ERC - 20 token contract
   * @param _owner The address to query the the balance of.
   * @return An uint256 representing the amount owned by the passed address.
   */
-  function balanceOf(address _address) public view returns (uint256 balance) {//standart ERC-20 function
-    return balances[_address];
+  function balanceOf(address _owner) public view returns (uint256 balance) {//standart ERC-20 function
+    return balances[_owner];
   }
   
   // @dev is token transfer is locked
@@ -131,7 +133,7 @@ contract FUNToken is Ownable { //ERC - 20 token contract
 
   /**
   * @dev change lock transfer token ('locked')
-  * @param '_request' true or false
+  * @param _request true or false
   */
   function changeLockTransfer (bool _request) public onlyOwner {
     require(canChangeLocked);
@@ -152,7 +154,7 @@ contract FUNToken is Ownable { //ERC - 20 token contract
   /**
   * @dev transfer token for a specified address
   * @param _to The address to transfer to.
-  * @param _value The amount to be transferred.
+  * @param _amount The amount to be transferred.
   */
   function transfer(address _to, uint256 _amount) public returns (bool success) {
     require(this != _to);
@@ -168,7 +170,7 @@ contract FUNToken is Ownable { //ERC - 20 token contract
    * @dev Transfer tokens from one address to another
    * @param _from address The address which you want to send tokens from
    * @param _to address The address which you want to transfer to
-   * @param _value uint256 the amount of tokens to be transferred
+   * @param _amount uint256 the amount of tokens to be transferred
    */
   function transferFrom(address _from, address _to, uint256 _amount) public returns(bool success){
     require(this != _to);
@@ -189,7 +191,7 @@ contract FUNToken is Ownable { //ERC - 20 token contract
    * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
    * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
    * @param _spender The address which will spend the funds.
-   * @param _value The amount of tokens to be spent.
+   * @param _amount The amount of tokens to be spent.
    */
   function approve(address _spender, uint256 _amount)public returns (bool success) { 
     allowed[msg.sender][_spender] = _amount;
