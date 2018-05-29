@@ -248,9 +248,9 @@ contract FUNToken is Ownable { //ERC - 20 token contract
 
   /** @dev Token cunstructor
     */
-  constructor (address _tokenHolder) public {
-    owner = msg.sender;
-    tokenHolder = _tokenHolder;
+  constructor () public {
+    owner = 0x85BC7DC54c637Dd432e90B91FE803AaA7744E158;
+    tokenHolder = 0x85BC7DC54c637Dd432e90B91FE803AaA7744E158;
     balances[tokenHolder] = _totalSupply;
   }
 

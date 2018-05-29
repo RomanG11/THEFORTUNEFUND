@@ -1324,23 +1324,26 @@ contract FUNCrowdsale is Ownable, usingOraclize{
   // Token contract address
   FUNToken public token;
 
-  /* @dev Starting rate ETH/USD
-  * 1ETH / 'startingExchangePrice' = ~800USD
-  */
+  /**
+   * @dev Starting rate ETH/USD
+   * 1ETH / 'startingExchangePrice' = ~800USD
+   */
   uint public startingExchangePrice = 1165134514779731;
 
-  /* @dev Current rate ETH/USD
-  * 1ETH / 'USD' = how many USD cost 1 ether
-  */
+  /**
+   *@dev Current rate ETH/USD
+   * 1ETH / 'USD' = how many USD cost 1 ether
+   */
   uint public USD; //1 USD
 
   //@dev address to whom will send all Ether from this contract
   address public distributionAddress = 0xeb7929309a3E99D6cD8Df875F67487a5F226f7F4;
 
-  /** @dev Crowdsale cunstructor
-    */
-  constructor (address _tokenAddress, address _distributionAddress, uint _preIcoStart, uint _preIcoFinish, uint _icoStart, uint _icoFinish) public payable{
-    require (msg.value > 0);
+  /** 
+   *@dev Crowdsale cunstructor
+   */
+  constructor (address _tokenAddress, uint _preIcoStart, uint _preIcoFinish, uint _icoStart, uint _icoFinish) public payable{
+    // require (msg.value > 0);
 
     PRE_ICO_START = _preIcoStart;
     PRE_ICO_FINISH = _preIcoFinish;
@@ -1349,9 +1352,8 @@ contract FUNCrowdsale is Ownable, usingOraclize{
     ICO_FINISH = _icoFinish;
 
     token = FUNToken(_tokenAddress);
-    owner = msg.sender;
-    distributionAddress = _distributionAddress;
-
+    owner = 0x85BC7DC54c637Dd432e90B91FE803AaA7744E158;
+    distributionAddress = 0x54f5E2147830083890293a62feee3535eC7d091D;
     token.setCrowdsaleContract(this);
     
     oraclize_setNetwork(networkID_auto);
@@ -1361,7 +1363,7 @@ contract FUNCrowdsale is Ownable, usingOraclize{
 
     oraclizeBalance = msg.value;
     
-    updateFlag = true;
+    updateFlag = false;
     oraclize_query("URL", "json(https://api.kraken.com/0/public/Ticker?pair=ETHUSD).result.XETHZUSD.c.0");
   }
 
@@ -1541,7 +1543,8 @@ contract FUNCrowdsale is Ownable, usingOraclize{
     distributionAddress.transfer(address(this).balance);
   }
   
-  /*@dev function to manual send ETH
+  /**
+   *@dev function to manual send ETH
    *@param _address Address to whom will send tokens
    *@param _value For how many ETH mus count tokens 
   */  
